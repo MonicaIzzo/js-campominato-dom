@@ -1,0 +1,95 @@
+/********************************************
+    GENERAL STYLES
+********************************************/
+
+
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/********************************************
+    UTILITIES
+********************************************/
+.debug {
+    border: 2px dotted red;
+}
+
+
+/********************************************
+    LAYOUT
+********************************************/
+#header {
+    height: 80px;
+}
+
+#logo {
+    display: inline;
+    line-height: 80px;
+    vertical-align: middle;
+}
+
+h1 {
+    display: inline;
+    line-height: 80px;
+    vertical-align: middle;
+}
+
+button {
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    border: 2px solid #418458;
+    background-color: #418458;
+}
+
+button:hover {
+    background-color: white;
+    border: 2px solid #418458;
+    color: #418458;
+}
+
+#grid {
+    width: 1000px;
+    padding: 0;
+}
+
+.col {
+    margin: 0;
+    }
+
+
+.square {
+    display: inline-block;
+    border: 2px solid white;
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    width: 100px;
+    height: 100px;
+    margin: 0;
+    line-height: 96px;
+    cursor: pointer;
+}
+
+.square.hover {
+    background-color: aqua;
+}
+/* Text */
+
+/* Border */
+
+/* UI */
+
+/* Header */
+
+/* Main */
+
+/* Footer */
