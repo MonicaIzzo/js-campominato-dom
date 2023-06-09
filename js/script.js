@@ -44,24 +44,17 @@ console.log ('JS OK');
 // #1 Svuotamento del HTML Elimino dalla pagina gli elementi che saranno "generati" tramite JS.
 
 // #2 Recupero dal DOM gli elementi dalla pagina tramite "getElement" con [id, class o tag].
+const grid = document.getElementById('grid');
+const playGame = document.getElementById('playGame');
+const punteggio = document.getElementById('punteggio');
+const esitoPartita = document.getElementById('partita');
 
 // #3  Setto delle variabili di comodo per gli elementi che dovrò manipolare e creo i SQUARE.
 
-// #4 Il computer deve generare 16 numeri casuali nello stesso range della difficltà prescelta.[stampiamo in console]
+const rows = 10;
+const cols = 10;
+const totalCells = rows * cols;
 
-// #5 l'utente clicca su una cella. [variabile per tenere il punteggio in modo incrementale. Una cella cliccata il punteggio non può essere incrementato] [stampiamo in console].
-
-// #5a se il numero è presente nella lista dei numeri generati abbiamo calpestato una bomba. La cella si colora di rosso e la partita termina. [stampiamo in console].
-
-// #5b se no, la cella cliccata si colora di azzurro e l'utente può continuare  a cliccare sulle altre celle.
-
-// #6 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
-
-// #7 la partita termina se: è stata cliccata una bomba [ha perso] [o] seperchè l'utente ha raggiunto il punteggio massimo [ha perso].
-
-// #8 Al termine della partita, il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba. [e il messaggio adeguato in caso di vittoria o sconfitta].
-
-// FINE
 const createSquare = () => {
  const square = document.createElement('div');
  square.className = 'square';
@@ -69,26 +62,14 @@ const createSquare = () => {
  return square;
 }
 
-// #0 Mi prepraro la sruttura del HTML + CSS.
-
-// #1 Svuotamento 
-
-// OPERAZIONI INIZIALI
-
-// #2 Recupero dal DOM gli elementi dalla pagina
-const grid = document.getElementById('grid');
-const playGame = document.getElementById('playGame');
+// #4 Il computer deve generare 16 numeri casuali nello stesso range della difficltà prescelta.[stampiamo in console]
 
 
-// #3 Setto delle variabili di comodo e mi creo le SQUARE
 
-const rows = 10;
-const cols = 10;
-const totalCells = rows * cols;
+// #4bis applico al Bottone [Crea] il compito di generare i square.
 
-// #4 applico al Bottone [Crea] il compito di generare i square.
 
-   playGame.addEventListener('click', function (){
+playGame.addEventListener('click', function (){
     // cambio in ricomincia
     playGame.innerText = 'Ricomincia';
     grid.innerText = '';
@@ -106,19 +87,20 @@ const totalCells = rows * cols;
 
 });
 
+// #5 l'utente clicca su una cella. [variabile per tenere il punteggio in modo incrementale. Una cella cliccata il punteggio non può essere incrementato] [stampiamo in console].
+
+// #5a se il numero è presente nella lista dei numeri generati abbiamo calpestato una bomba. La cella si colora di rosso e la partita termina. [stampiamo in console].
+
+// #5b se no, la cella cliccata si colora di azzurro e l'utente può continuare  a cliccare sulle altre celle.
+
+// #6 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+
+// #7 la partita termina se: è stata cliccata una bomba [ha perso] [o] seperchè l'utente ha raggiunto il punteggio massimo [ha perso].
+
+// #8 Al termine della partita, il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba. [e il messaggio adeguato in caso di vittoria o sconfitta].
 
 
-    
 
 
 
-    
-
-
-
-
-
-
-
-
-// #5 Ascolto il Bottone [Crea]
+// FINE
