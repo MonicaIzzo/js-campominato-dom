@@ -37,6 +37,10 @@ h1 {
     vertical-align: middle;
 }
 
+h4 {
+    color: red;
+}
+
 button {
     color: white;
     padding: 15px 32px;
