@@ -22,7 +22,7 @@
     LAYOUT
 ********************************************/
 #header {
-    height: 80px;
+    height: 100px;
 }
 
 #logo {
@@ -41,9 +41,14 @@ h4 {
     color: red;
 }
 
+#punteggio {
+    color: red;
+    font-weight: 700;
+}
+
 button {
     color: white;
-    padding: 15px 32px;
+    padding: 15px 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -76,13 +81,39 @@ button:hover {
     text-align: center;
     font-size: 24px;
     font-weight: 700;
-    width: 80px;
-    height: 80px;
     margin: 0;
-    line-height: 76px;
     cursor: pointer;
 }
 
-.square.hover {
+.square.easy.hover {
     background-color: aqua;
+
+}
+
+.square.normal.hover {
+    background-color: aqua;
+
+}
+
+.square.hard.hover {
+    background-color: aqua;
+
+}
+
+.square.easy {
+    width: calc(800px / 10);
+    height: calc(800px / 10);
+    line-height: 76px;
+}
+
+.square.normal {
+    width: calc(800px / 9);
+    height: calc(800px / 9);
+    line-height: 86px;
+}
+
+.square.hard {
+    width: calc(800px / 7);
+    height: calc(800px / 7);
+    line-height: 106px;
 }

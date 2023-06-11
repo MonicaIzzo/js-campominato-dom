@@ -37,70 +37,102 @@ Quando la partita termina dobbiamo capire se è terminata perchè è stata clicc
 // #8 Al termine della partita, il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba. [e il messaggio adeguato in caso di vittoria o sconfitta].
 // FINE
 
+
+
 console.log ('JS OK');
 
-// #0 Struttura HTML: Mi prepraro la sruttura del HTML + CSS.
+// FUNZIONI
 
-// #1 Svuotamento del HTML Elimino dalla pagina gli elementi che saranno "generati" tramite JS.
+function startGame () {
+// cambio in ricomincia
+    playGame.innerText =
+     'Ricomincia';
+    grid.innerHTML = '';
+    
+    const level =levelSelect.value;
 
-// #2 Recupero dal DOM gli elementi dalla pagina tramite "getElement" con [id, class o tag].
-const grid = document.getElementById('grid');
-const playGame = document.getElementById('playGame');
-const punteggio = document.getElementById('punteggio');
-const esitoPartita = document.getElementById('partita');
+    let rows;
+    let cols;
 
-// #3  Setto delle variabili di comodo per gli elementi che dovrò manipolare e creo i SQUARE.
+    switch(level) {
+        case 'hard' :
+        rows = 7;
+        cols = 7;
+        break;
+        case 'normal' :
+        rows = 9;
+        cols = 9;
+        break;
+        case 'easy' :
+        default:
+        rows = 10;
+        cols = 10; 
+    }
 
-const rows = 10;
-const cols = 10;
-const totalCells = rows * cols;
-
-const createSquare = () => {
- const square = document.createElement('div');
- square.className = 'square';
-
- return square;
-}
-
-// #4 Il computer deve generare 16 numeri casuali nello stesso range della difficltà prescelta.[stampiamo in console]
-
-
-
-// #4bis applico al Bottone [Crea] il compito di generare i square.
-
-
-playGame.addEventListener('click', function (){
-    // cambio in ricomincia
-    playGame.innerText = 'Ricomincia';
-    grid.innerText = '';
+    let totalCells = rows * cols;
 
     for (let i = 0; i < totalCells; i++) {
     const square = createSquare();
     square.innerText = i + 1;
+    square.classList.add(level);
+    console.log(level);
 
     square.addEventListener('click', function () {
         square.classList.add('hover');
-        console.log(i);
+        
+        console.log(++i);
+        
     });
     grid.appendChild(square);
     };
+}
 
-});
+const createSquare = () => {
+const square = document.createElement('div');
+square.classList.add('square');
 
-// #5 l'utente clicca su una cella. [variabile per tenere il punteggio in modo incrementale. Una cella cliccata il punteggio non può essere incrementato] [stampiamo in console].
+ return square;
+}
 
-// #5a se il numero è presente nella lista dei numeri generati abbiamo calpestato una bomba. La cella si colora di rosso e la partita termina. [stampiamo in console].
+// #0 Mi prepraro la sruttura del HTML + CSS.
 
-// #5b se no, la cella cliccata si colora di azzurro e l'utente può continuare  a cliccare sulle altre celle.
+// #1 Svuotamento 
 
-// #6 La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+// OPERAZIONI INIZIALI
 
-// #7 la partita termina se: è stata cliccata una bomba [ha perso] [o] seperchè l'utente ha raggiunto il punteggio massimo [ha perso].
+// #2 Recupero dal DOM gli elementi dalla pagina
+const grid = document.getElementById('grid');
+const playGame = document.getElementById('playGame');
+const levelSelect = document.getElementById('livello');
+console.log(levelSelect)
 
-// #8 Al termine della partita, il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba. [e il messaggio adeguato in caso di vittoria o sconfitta].
+// #3 Setto delle variabili di comodo e mi creo le SQUARE
+
+let rows;
+let cols;
+
+let level;
+
+if (level = 'easy') {
+    rows = 10;
+    cols = 10;
+} else if (level = 'normal') {
+    rows = 9;
+    cols = 9;
+} else {
+    rows = 7;
+    cols = 7;
+}
+
+totalCells = rows * cols;
+console.log(totalCells);
 
 
 
 
 
-// FINE
+
+
+
+// #4 applico al Bottone [Crea] il compito di generare i square.
+   playGame.addEventListener('click', startGame);

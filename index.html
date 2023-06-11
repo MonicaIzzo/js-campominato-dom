@@ -8,7 +8,7 @@
     <meta name="description" content="Free Web tutorials">
     <meta name="keywords" content="HTML, CSS">
     <meta name="author" content="Monica Izzo">
-    <title>Esercitazione JS Campo Minato DOM</title>
+    <title>Esercitazione JS Griglia Campo Minato</title>
 
     <!-- icon-->
     <link rel="icon" type="image/png" sizes="32x32" href="img/faicon.png">
@@ -28,36 +28,40 @@
 <body>
     <div class="container mt-2 mb-2 p-0" id="header">
         <div class="row justify-content-between align-content-center align-items-center">
-<!-- LOGO -->
-            <div class="col">
+            <!-- LOGO -->
+            <div class="col-8">
                 <img src="img/Logo.png" id="logo" alt=" logo Boolean">
                 <h1>CAMPO MINATO</h1>
             </div>
-<!-- BOTTONE -->
-            <div class="col text-end">
+            <!-- BOTTONE -->
+            <div class="col-3 text-end">
+                <div>Seleziona un livello di difficoltà:</div>
+                <select id="livello" class="w-100">
+                    <option value="easy">Facile</option>
+                    <option value="normal">Normale</option>
+                    <option value="hard">Alta</option>
+                </select>
+            </div>
+            <div class="col-1 text-end">
                 <button class="bg-" id="playGame">Play</button>
             </div>
         </div>
+            <!-- Punteggio -->
+            <div class="text-end">
+                <h4 class="d-none" id="score"><strong>BRAVO, HAI VINTO!</strong></h4>
+                <h6>Punti: <span id="punteggio">0</span></h6>
+            </div>
+            <!-- VITTORIA O PERDIDA -->
     </div>
-
-
-<div class="container" id="header">
-    <!-- Punteggio -->
-    <div class="text-end">
-        <h4 class="d-none" id="partita"><strong>BRAVO, HAI VINTO!</strong></h4>
-        <h6>Punti: <span id="punteggio"><strong>0</strong></span></h6>
+    <!-- Campo minato -->
+    <div class="container text-center bg-success text-white p-5 mx-auto">
+        <div class="row d-flex flex-wrap p-0 mx-auto gx-0" id="grid">
+        </div>
     </div>
-    <!-- VITTORIA O PERDIDA -->
-</div>
-<!-- Campo minato -->
-<div class="container text-center bg-success text-white p-5 mx-auto">
-    <div class="row d-flex flex-wrap p-0 mx-auto gx-0" id="grid">
-    </div>
-</div>
-<!-- fotter -->
-        <footer class="container mt-2 mb-2 p-0">
-            <p>Made with <i class="fa-solid fa-heart"></i> by <a href="#">Boolean</a></p>
-        </footer>
+    <!-- fotter -->
+    <footer class="container mt-2 mb-2 p-0">
+        <p>Made with <i class="fa-solid fa-heart"></i> by <a href="#">Boolean</a></p>
+    </footer>
 
     <!-- script javascript -->
     <script src="js/script.js"></script>
