@@ -4,7 +4,7 @@
 
 Il computer deve generare 16 numeri casuali nello stesso range della difficltà prescelta: le bombe. Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell'array delle bombe non potranno esserci due numeri uguali
 In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati abbiamo calpestato una bomba. La cella si colora di rosso e la partita termina. Altrimenti, la cella cliccata si colora di azzurro e l'utente può continuare  a cliccare sulle altre celle.
-LA partita termina quando il giocatore clicca su una bomba o quando raggiunger il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+La partita termina quando il giocatore clicca su una bomba o quando raggiunger il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
 Al termine della partita, il software deve comunicare il punteggio, cioè il numero di volte che l'utente ha cliccato su una cella che non era una bomba
 # MILESTONE 1
 Prepariamo "Qualcosa" per tenere il punteggio dell'utente.
@@ -79,9 +79,11 @@ function startGame () {
 
     square.addEventListener('click', function () {
         square.classList.add('hover');
-        
         console.log(++i);
-        
+
+        // incremento il punteggio
+        scorePlaceholder.innerText = ++score;
+        console.log('il punteggio è '+ score);
     });
     grid.appendChild(square);
     };
@@ -104,9 +106,11 @@ square.classList.add('square');
 const grid = document.getElementById('grid');
 const playGame = document.getElementById('playGame');
 const levelSelect = document.getElementById('livello');
-console.log(levelSelect)
+console.log(levelSelect);
+const scorePlaceholder = document.getElementById('score');
 
-// #3 Setto delle variabili di comodo e mi creo le SQUARE
+
+// Setto delle variabili di comodo.
 
 let rows;
 let cols;
@@ -127,12 +131,12 @@ if (level = 'easy') {
 totalCells = rows * cols;
 console.log(totalCells);
 
+let score = 0;
+let bombs;
 
 
 
 
 
-
-
-// #4 applico al Bottone [Crea] il compito di generare i square.
+// # Applico al Bottone [Crea] il compito di generare i square.
    playGame.addEventListener('click', startGame);
