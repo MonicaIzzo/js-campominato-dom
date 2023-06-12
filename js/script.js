@@ -43,6 +43,19 @@ console.log ('JS OK');
 
 // FUNZIONI
 
+function generateBombs (numerOfBombs, maxNumber, blacklist) {
+let bombs = [];
+while (bombs.length < numerOfBombs) {
+    let randomNumber;
+    do {
+        randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+    } while (bombs.includes(randomNumber));
+    bombs.push(randomNumber);
+}
+
+return bombs;
+}
+
 function startGame () {
 // cambio in ricomincia
     playGame.innerText =
@@ -71,6 +84,13 @@ function startGame () {
 
     let totalCells = rows * cols;
 
+    let maxPoint = 0;
+    let bombs =  0;
+
+    const totalBombs = 16;
+    maxPoint = totalBombs - totalBombs; 
+    bombs = [];  
+
     for (let i = 0; i < totalCells; i++) {
     const square = createSquare();
     square.innerText = i + 1;
@@ -81,9 +101,29 @@ function startGame () {
         square.classList.add('hover');
         console.log(++i);
 
-        // incremento il punteggio
-        scorePlaceholder.innerText = ++score;
-        console.log('il punteggio è '+ score);
+        // controllo se è una bomba
+        const hasHitBomb = bombs.includes(i);
+
+        if (hasHitBomb) {
+            square.classList.add ('bomb');
+        } else {
+            scorePlaceholder.innerText = ++score;
+            console.log('il punteggio è '+ score);
+
+            if (score =maxPoint) {
+                console.log ('Hai VINTO')
+            }
+        }
+
+        
+        
+
+
+
+        
+
+
+
     });
     grid.appendChild(square);
     };

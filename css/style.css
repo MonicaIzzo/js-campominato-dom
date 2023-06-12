@@ -117,3 +117,19 @@ button:hover {
     height: calc(800px / 7);
     line-height: 106px;
 }
+
+
+.square.easy.hover.bomb {
+    background-color: red;
+
+}
+
+.square.normal.hover.bomb {
+    background-color: red;
+
+}
+
+.square.hard.hover.bomb {
+    background-color: red;
+
+}
