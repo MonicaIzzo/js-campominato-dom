@@ -2,7 +2,9 @@
     GENERAL STYLES
 ********************************************/
 
-
+:root {
+    --cols: 10;
+}
 /* Reset CSS */
 * {
     margin: 0;
@@ -83,53 +85,17 @@ button:hover {
     font-weight: 700;
     margin: 0;
     cursor: pointer;
-}
-
-.square.easy.hover {
-    background-color: aqua;
-
-}
-
-.square.normal.hover {
-    background-color: aqua;
-
-}
-
-.square.hard.hover {
-    background-color: aqua;
-
-}
-
-.square.easy {
-    width: calc(800px / 10);
-    height: calc(800px / 10);
+    width: calc(800px / var(--cols));
+    height: calc(800px / var(--cols));
     line-height: 76px;
 }
 
-.square.normal {
-    width: calc(800px / 9);
-    height: calc(800px / 9);
-    line-height: 86px;
+.square.hover {
+    background-color: aqua;
+    cursor: none;
 }
 
-.square.hard {
-    width: calc(800px / 7);
-    height: calc(800px / 7);
-    line-height: 106px;
-}
-
-
-.square.easy.hover.bomb {
+.bombs {
     background-color: red;
-
-}
-
-.square.normal.hover.bomb {
-    background-color: red;
-
-}
-
-.square.hard.hover.bomb {
-    background-color: red;
-
+    cursor: none;
 }

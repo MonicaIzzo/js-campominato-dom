@@ -41,142 +41,168 @@ Quando la partita termina dobbiamo capire se è terminata perchè è stata clicc
 
 console.log ('JS OK');
 
-// FUNZIONI
+/*------------------------
+    OPERAZIONI INIZIALI
+-------------------------*/ 
 
-function generateBombs (numerOfBombs, maxNumber, blacklist) {
-let bombs = [];
-while (bombs.length < numerOfBombs) {
-    let randomNumber;
-    do {
-        randomNumber = Math.floor(Math.random() * maxNumber) + 1;
-    } while (bombs.includes(randomNumber));
-    bombs.push(randomNumber);
-}
-
-return bombs;
-}
-
-function startGame () {
-// cambio in ricomincia
-    playGame.innerText =
-     'Ricomincia';
-    grid.innerHTML = '';
-    
-    const level =levelSelect.value;
-
-    let rows;
-    let cols;
-
-    switch(level) {
-        case 'hard' :
-        rows = 7;
-        cols = 7;
-        break;
-        case 'normal' :
-        rows = 9;
-        cols = 9;
-        break;
-        case 'easy' :
-        default:
-        rows = 10;
-        cols = 10; 
-    }
-
-    let totalCells = rows * cols;
-
-    let maxPoint = 0;
-    let bombs =  0;
-
-    const totalBombs = 16;
-    maxPoint = totalBombs - totalBombs; 
-    bombs = [];  
-
-    for (let i = 0; i < totalCells; i++) {
-    const square = createSquare();
-    square.innerText = i + 1;
-    square.classList.add(level);
-    console.log(level);
-
-    square.addEventListener('click', function () {
-        square.classList.add('hover');
-        console.log(++i);
-
-        // controllo se è una bomba
-        const hasHitBomb = bombs.includes(i);
-
-        if (hasHitBomb) {
-            square.classList.add ('bomb');
-        } else {
-            scorePlaceholder.innerText = ++score;
-            console.log('il punteggio è '+ score);
-
-            if (score =maxPoint) {
-                console.log ('Hai VINTO')
-            }
-        }
-
-        
-        
-
-
-
-        
-
-
-
-    });
-    grid.appendChild(square);
-    };
-}
-
-const createSquare = () => {
-const square = document.createElement('div');
-square.classList.add('square');
-
- return square;
-}
-
-// #0 Mi prepraro la sruttura del HTML + CSS.
-
-// #1 Svuotamento 
-
-// OPERAZIONI INIZIALI
-
-// #2 Recupero dal DOM gli elementi dalla pagina
+// Recupero gli elementi dal DOM
 const grid = document.getElementById('grid');
 const playGame = document.getElementById('playGame');
 const levelSelect = document.getElementById('livello');
-console.log(levelSelect);
-const scorePlaceholder = document.getElementById('score');
+const scorePlacehoder = document.getElementById('score');
+           
 
 
-// Setto delle variabili di comodo.
+/*------------------------
+    FUNZIONI
+-------------------------*/ 
+const startGame = () => {
 
+// Funzioni per rilevare tutte le celle
+    const revealCell = (bombs) => {
+    // recuperiamo le celle
+    const cells = document.querySelectorAll('.square');
+        
+        for (let i = 0; i < cells.length; i++) {
+            const cell = cells[i];
+            cell.classList.add('hover');
+            const cellNumber = parseInt(cell.innerText);
+            if (bombs.includes(cellNumber)) cell.classList.add('bombs');
+        }
+    }
+
+// Funzione per create le bombe
+const generateBombs = (numberOfBombs, maxNumber) => {
+    let bombs = [];
+
+    while (bombs.length < numberOfBombs) {
+        let randomNumber;
+    do {
+        randomNumber = Math.floor(Math.random() * maxNumber) + 1;
+    }   while (bombs.includes(randomNumber));
+        bombs.push(randomNumber); 
+    }
+    return bombs;
+}
+
+// Funzione per creare la cell
+const createSquare =(cellNumber) => {
+    const cell = document.createElement('div');
+    cell.classList.add('square');
+
+    cell.append(cellNumber);
+    return cell;
+}
+
+// Funzione per terminare la partita
+const endGame = (score, hasHitBomb) => {
+    const message = hasHitBomb
+    ? `Hai perso! Hai totalizzato ${score} punti.`
+    : `Hai vinto! Hai totalizzato ${score} punti.`;
+
+    alert(message);
+
+// Riveliamo tutte le celle
+    revealCell();
+}
+
+// Cambio il testo in ricomincia
+playGame.innerText = 'Rigioca';
+
+// Svuoto la pagina
+grid.innerHTML = '';
+
+
+// Recupero il livello scelto
+const level = levelSelect.value;
+
+// Calcolo le celle totali.
 let rows;
 let cols;
 
-let level;
-
-if (level = 'easy') {
+// setto la difficoltà dei livelli
+switch(level) {
+    case 'hard' :
+        rows = 7;
+        cols = 7;
+    break;
+    case 'normal' :
+        rows = 9;
+        cols = 9;
+    break;
+    default:
     rows = 10;
     cols = 10;
-} else if (level = 'normal') {
-    rows = 9;
-    cols = 9;
-} else {
-    rows = 7;
-    cols = 7;
+    break;
 }
 
-totalCells = rows * cols;
+// Recupero il root
+const root = document.querySelector(':root');
+root.style.setProperty('--cols', cols);
+
+
+
+const totalCells = rows * cols;
+
 console.log(totalCells);
 
+// Prepato il punteggio
 let score = 0;
-let bombs;
 
 
+// setto il numero di bombe
+const totalBombs = 16;
+
+// preparo il punteggio massimo
+const maxScore = totalCells - totalBombs;
 
 
+// preparo un contenitore per le bombe
+bombs = generateBombs (totalBombs, totalCells);
 
-// # Applico al Bottone [Crea] il compito di generare i square.
-   playGame.addEventListener('click', startGame);
+console.log(bombs);
+
+/*------------------------
+    LOGICA
+-------------------------*/ 
+
+    for (let i = 1; i <= totalCells; i++) {
+        // Creo la cella
+        const square = createSquare(i);
+
+
+        // Aggancia l'event listner
+        square.addEventListener('click', () => {
+                // Controllo se è stata già cliccata
+                if (square.classList.contains('hover')) return;
+
+                // aggiungo la classe hover
+                square.classList.add('hover');
+
+                // Controllo se è una bomba
+                const hasHitBomb = bombs.includes(1);
+
+                if (hasHitBomb) {
+                square.classList.add('bombs');    
+
+                // Segnalo che ha perso
+                endGame (score, hasHitBomb, bombs);
+                } else {
+                // Incremento il punteggio
+                scorePlacehoder.innerText = ++score;
+
+                // Controllo se l'utente ha vinto
+                if (score === maxScore) {
+                endGame (score, hasHitBomb, bombs);
+                }
+            }
+        });
+
+// la inserisco in pagina
+    grid.appendChild(square);
+    }
+}
+
+//  Aggancio l'event listener al mio Bottone
+
+playGame.addEventListener('click', startGame);
