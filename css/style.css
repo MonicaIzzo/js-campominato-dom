@@ -95,7 +95,7 @@ button:hover {
     cursor: none;
 }
 
-.bombs {
+.square.hover.bombs {
     background-color: red;
     cursor: none;
 }

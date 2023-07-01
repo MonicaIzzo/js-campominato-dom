@@ -57,9 +57,10 @@ const scorePlacehoder = document.getElementById('score');
     FUNZIONI
 -------------------------*/ 
 const startGame = () => {
+    let isGameOver = false;
 
 // Funzioni per rilevare tutte le celle
-    const revealCell = (bombs) => {
+    const revealCells = () => {
     // recuperiamo le celle
     const cells = document.querySelectorAll('.square');
         
@@ -101,9 +102,10 @@ const endGame = (score, hasHitBomb) => {
     : `Hai vinto! Hai totalizzato ${score} punti.`;
 
     alert(message);
+    isGameOver = true;
 
 // Riveliamo tutte le celle
-    revealCell();
+    revealCells();
 }
 
 // Cambio il testo in ricomincia
@@ -140,8 +142,6 @@ switch(level) {
 const root = document.querySelector(':root');
 root.style.setProperty('--cols', cols);
 
-
-
 const totalCells = rows * cols;
 
 console.log(totalCells);
@@ -150,7 +150,7 @@ console.log(totalCells);
 let score = 0;
 
 
-// setto il numero di bombe
+// setto il numero delle bombe
 const totalBombs = 16;
 
 // preparo il punteggio massimo
@@ -158,7 +158,7 @@ const maxScore = totalCells - totalBombs;
 
 
 // preparo un contenitore per le bombe
-bombs = generateBombs (totalBombs, totalCells);
+bombs = generateBombs(totalBombs, totalCells);
 
 console.log(bombs);
 
@@ -170,30 +170,29 @@ console.log(bombs);
         // Creo la cella
         const square = createSquare(i);
 
-
         // Aggancia l'event listner
         square.addEventListener('click', () => {
                 // Controllo se è stata già cliccata
-                if (square.classList.contains('hover')) return;
+                if (isGameOver === true || square.classList.contains('hover')) return;
 
                 // aggiungo la classe hover
                 square.classList.add('hover');
 
                 // Controllo se è una bomba
-                const hasHitBomb = bombs.includes(1);
+                const hasHitBomb = bombs.includes(i);
 
                 if (hasHitBomb) {
                 square.classList.add('bombs');    
 
                 // Segnalo che ha perso
-                endGame (score, hasHitBomb, bombs);
+                endGame (score, hasHitBomb);
                 } else {
                 // Incremento il punteggio
                 scorePlacehoder.innerText = ++score;
 
                 // Controllo se l'utente ha vinto
                 if (score === maxScore) {
-                endGame (score, hasHitBomb, bombs);
+                endGame (score, hasHitBomb);
                 }
             }
         });
@@ -204,5 +203,4 @@ console.log(bombs);
 }
 
 //  Aggancio l'event listener al mio Bottone
-
 playGame.addEventListener('click', startGame);
