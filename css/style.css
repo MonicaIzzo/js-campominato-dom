@@ -5,6 +5,7 @@
 :root {
   --cols: 10;
 }
+
 /* Reset CSS */
 * {
   margin: 0;
@@ -23,25 +24,30 @@
     LAYOUT
 ********************************************/
 #header {
-  height: 100px;
+  height: 110px;
 }
+
 #logo {
   display: inline;
   line-height: 80px;
   vertical-align: middle;
 }
+
 h1 {
   display: inline;
   line-height: 80px;
   vertical-align: middle;
 }
+
 h4 {
   color: red;
 }
+
 #score {
   color: red;
   font-weight: 700;
 }
+
 button {
   color: white;
   padding: 15px 15px;
@@ -52,19 +58,26 @@ button {
   transition-duration: 0.4s;
   border: 2px solid #418458;
   background-color: #418458;
+  width: 90px;
+  height: 80px;
+
 }
+
 button:hover {
   background-color: white;
   border: 2px solid #418458;
   color: #418458;
 }
+
 #grid {
   width: 800px;
   padding: 0;
 }
+
 .col {
   margin: 0;
 }
+
 .square {
   display: inline-block;
   border: 2px solid white;
@@ -78,10 +91,12 @@ button:hover {
   height: calc(800px / var(--cols));
   line-height: 76px;
 }
+
 .square.hover {
   background-color: aqua;
   cursor: none;
 }
+
 .square.hover.bombs {
   background-color: red;
   cursor: none;

@@ -24,7 +24,7 @@ Quando la partita termina dobbiamo capire se è terminata perchè è stata clicc
 */
 
 // #0 Struttura HTML: Mi prepraro la sruttura del HTML + CSS.
-// #1 Svuotamento del HTML Elimino dalla pagina gli elementi che saranno "generati" tramite JS.
+// #1 Svuotamento del HTML - Elimino dalla pagina gli elementi che saranno "generati" tramite JS.
 // #2 Recupero dal DOM gli elementi dalla pagina tramite "getElement" con [id, class o tag].
 // #3  Setto delle variabili di comodo per gli elementi che dovrò manipolare e creo i SQUARE.
 // #4 Il computer deve generare 16 numeri casuali nello stesso range della difficltà prescelta.[stampiamo in console]
@@ -38,9 +38,9 @@ Quando la partita termina dobbiamo capire se è terminata perchè è stata clicc
 
 console.log("JS OK");
 
-/*------------------------
+/*------------------------------------------------
     OPERAZIONI INIZIALI
--------------------------*/
+-------------------------------------------------*/
 
 // Recupero gli elementi dal DOM
 const grid = document.getElementById("grid");
@@ -48,13 +48,27 @@ const playGame = document.getElementById("playGame");
 const levelSelect = document.getElementById("livello");
 const scorePlacehoder = document.getElementById("score");
 
-/*------------------------
-    FUNZIONI
--------------------------*/
+
+
+
+/*------------------------------------------------
+    FUNZIONI DEL GIOCO
+-------------------------------------------------*/
 const startGame = () => {
   let isGameOver = false;
 
-  // Funzioni per rilevare tutte le celle
+
+/*------     FUNZIONE PER CREARE LE SQUARE    -----*/
+  const createSquare = (cellNumber) => {
+    const cell = document.createElement("div");
+    cell.classList.add("square");
+    cell.append(cellNumber);
+
+    return cell;
+  };
+  
+
+  /*------     FUNZIONE PER RILEVARE TUTTE LE CELLE    -----*/
   const revealCells = () => {
     // recuperiamo le celle
     const cells = document.querySelectorAll(".square");
@@ -67,7 +81,7 @@ const startGame = () => {
     }
   };
 
-  // Funzione per create le bombe
+  /*------     FUNZIONE PER CREARE LE BOMBE    -----*/
   const generateBombs = (numberOfBombs, maxNumber) => {
     let bombs = [];
 
@@ -81,16 +95,7 @@ const startGame = () => {
     return bombs;
   };
 
-  // Funzione per creare la cell
-  const createSquare = (cellNumber) => {
-    const cell = document.createElement("div");
-    cell.classList.add("square");
-
-    cell.append(cellNumber);
-    return cell;
-  };
-
-  // Funzione per terminare la partita
+/*------     FUNZIONE PER TERMINARE IL GIOCO    -----*/
   const endGame = (score, hasHitBomb) => {
     const message = hasHitBomb
       ? `Hai perso! Hai totalizzato ${score} punti.`
@@ -154,15 +159,20 @@ const startGame = () => {
 
   console.log(bombs);
 
-  /*------------------------
+
+
+
+
+
+  /*------------------------------------------------
     LOGICA
--------------------------*/
+  -------------------------------------------------*/
 
   for (let i = 1; i <= totalCells; i++) {
     // Creo la cella
     const square = createSquare(i);
 
-    // Aggancia l'event listner
+    // Aggancio l'event listener al mio square
     square.addEventListener("click", () => {
       // Controllo se è stata già cliccata
       if (isGameOver === true || square.classList.contains("hover")) return;
@@ -194,5 +204,5 @@ const startGame = () => {
   }
 };
 
-//  Aggancio l'event listener al mio Bottone
+//  Aggancio l'event listener al mio Button
 playGame.addEventListener("click", startGame);
